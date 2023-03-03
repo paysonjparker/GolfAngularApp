@@ -1,0 +1,29 @@
+<header align="center">
+    <h1>Create a Product</h1>
+</header>
+
+<body>
+    <div class="widget-background" style="padding: 8vw; text-align: center;">
+        <div class="pop-up-widget">
+            <form (ngSubmit)="onSubmit()" #createForm="ngForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" class="form-control" aria-describedby="helpName" placeholder="Enter the name of the product" required [(ngModel)]="product.name" name="name">
+                    
+                    <label for="description">Description</label>
+                    <input id="description" type="text" class="form-control" aria-describedby="helpDescription" placeholder="Enter the description of the product" required [(ngModel)]="product.description" name="description">
+                
+                    <label for="brand">Brand</label>
+                    <input id="brand" type="text" class="form-control" aria-describedby="helpBrand" placeholder="Enter the brand of the product" required [(ngModel)]="product.brand" name="brand">
+                
+                    <label for="price">Price</label>
+                    <input id="price" type="number" class="form-control" aria-describedby="helpPrice" placeholder="Enter the price of the product" required [(ngModel)]="product.price" name="price">
+                </div>
+                <div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
