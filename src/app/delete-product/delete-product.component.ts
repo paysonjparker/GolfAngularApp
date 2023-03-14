@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../models/products.model';
 import { ProductServiceService } from '../service/product-service.service';
 
@@ -12,13 +12,31 @@ import { ProductServiceService } from '../service/product-service.service';
 export class DeleteProductComponent {
 
   @Input() product: Product;
+  pId: number;
   
-  constructor(private service: ProductServiceService, private router: Router) { }
+  constructor(private service: ProductServiceService, private router: Router, private route: ActivatedRoute) {
+    route.params.subscribe(params => 
+      {
+        console.log(params);
+      });
+  }
 
   ngOnInit() {
-    let status = this.service.deleteProduct(this.product.productId, () => {
-      console.log("Success create a product");
+    var url_string = window.location.href;
+    console.log(url_string);
+    var url = new URL(url_string);
+    var productId = url.pathname.toString();
+    productId = productId.substring((productId.length - 2), productId.length);
+    console.log(productId);
+   
+    let status = this.service.deleteProduct(parseInt(productId), () => {
+      console.log("Success delete a product");
     });
-    // this.router.navigate(['/']);
+
+    this.route.queryParams.subscribe(params => {
+      this.pId = params['id'];
+    });
+
+    this.router.navigate(['/']);
   }
 }
